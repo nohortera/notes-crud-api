@@ -1,5 +1,5 @@
 const User = require('../models/User');
-const Note = require('../models/Note')
+const Note = require('../models/Note');
 
 // eslint-disable-next-line require-jsdoc
 class ProfController {
@@ -9,7 +9,7 @@ class ProfController {
       const id = req.user.id;
       const user = await User.findOne({_id: id});
       if (!user) {
-        res.status(404).json('Not found');
+        return res.status(404).json('Not found');
       }
       const {_id, username, createdDate} = user;
       const modifiedUser = {
@@ -18,7 +18,7 @@ class ProfController {
       res.status(200).json(modifiedUser);
     } catch (e) {
       console.log(e);
-      res.status(500).json({message: 'GET profile error'});
+      return res.status(500).json({message: 'GET profile error'});
     }
   }
 
@@ -28,14 +28,14 @@ class ProfController {
       const id = req.user.id;
       const user = await User.findOne({_id: id});
       if (!user) {
-        res.status(404).json('Not found');
+        return res.status(404).json('Not found');
       }
       await User.deleteOne({_id: id})
       await Note.deleteMany({userId: id})
       res.json({message: 'Success'})
     } catch (e) {
       console.log(e);
-      res.status(500).json({message: 'ProfileController Error'});
+      return res.status(500).json({message: 'ProfileController Error'});
     }
   }
 
@@ -56,7 +56,7 @@ class ProfController {
       res.json({message: 'Success'});
     } catch (e) {
       console.log(e);
-      res.status(500).json({message: 'ProfileController Error'});
+      return res.status(500).json({message: 'ProfileController Error'});
     }
   }
 }

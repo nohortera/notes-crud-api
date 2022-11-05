@@ -1,20 +1,20 @@
 const Router = require('express');
 const router = new Router();
 const controller = require('../controllers/noteController');
-const authMidleware = require('../middlewares/authMiddleware');
+const authMiddleware = require('../middlewares/authMiddleware');
 
 
-router.get('/', authMidleware, controller.getNotes);
+router.get('/', authMiddleware, controller.getNotes);
 
-router.post('/', authMidleware, controller.addNote);
+router.post('/', authMiddleware, controller.addNote);
 
-router.get('/:id', authMidleware, controller.getNote);
+router.get('/:id', authMiddleware, controller.getNote);
 
-router.put('/:id', authMidleware, controller.updateNote);
+router.put('/:id', authMiddleware, controller.updateNote);
 
-router.patch('/:id', authMidleware, controller.changeFlag);
+router.patch('/:id', authMiddleware, controller.changeFlag);
 
-router.delete('/:id', authMidleware, controller.deleteNote);
+router.delete('/:id', authMiddleware, controller.deleteNote);
 
 
 module.exports = router;
